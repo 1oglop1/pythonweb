@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Flask Docker",
+            "type": "python",
+            "request": "attach",
+            "host": "192.168.99.100",
+            "port": 3000,
+            "jinja": true,
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/src",
+                    "remoteRoot": "/src"
+                }
+            ]
+        },
+        {
+            "name": "Python: Flask Local",
+            "type": "python",
+            "request": "launch",
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "src/main.py",
+                "FLASK_ENV": "development",
+                "FLASK_DEBUG": "1"
+            },
+            "args": [
+                "run"
+            ],
+            "jinja": true
+        },
+    ]
+}

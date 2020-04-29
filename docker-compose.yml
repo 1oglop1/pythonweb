@@ -1,0 +1,19 @@
+# docker-compose.yml specific for python flask usage
+# * exposing port 80 for the application
+# * exposing port 3000 for the debugger
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python -m flask run --host=0.0.0.0 --port=80 --no-reload
+    environment: 
+      FLASK_APP: "src/main.py"
+      FLASK_ENV: "development"
+      FLASK_DEBUG: "1"
+    # network_mode: bridge
+    volumes:
+     - ./src/:/src/
+    ports:
+     - "80:80"
+     - "3000:3000"
