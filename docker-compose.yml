@@ -6,14 +6,20 @@ version: '3'
 services:
   web:
     build: .
-    command: python -m flask run --host=0.0.0.0 --port=80 --no-reload
+    entrypoint:
+      - flask
+      - run
+      - --host=0.0.0.0
+      - --port=80
+    # command: bash
     environment: 
-      FLASK_APP: "src/main.py"
+      FLASK_APP: main.py
+      FLASK_DEBUG: 1
       FLASK_ENV: "development"
-      FLASK_DEBUG: "1"
-    # network_mode: bridge
-    volumes:
-     - ./src/:/src/
+      # We use ptvsd instead
+      FLASK_DEBUG: "0"
+    volumes: 
+      - "./src:/src"
     ports:
-     - "80:80"
-     - "3000:3000"
+      - '80:80'
+      - '3000:3000'

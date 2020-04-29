@@ -2,13 +2,13 @@
 # based on the python:3.7 image
 FROM python:3.7
 
-# Define environment variables
-ENV PYTHONUNBUFFERED 1
-
 # Prepare development folder inside the container
 RUN mkdir /src
 WORKDIR /src
 COPY src /src/
+
+# Upgrade pip
+RUN python -m pip install --upgrade pip
 
 # Include python packages you require here
 RUN pip install flask

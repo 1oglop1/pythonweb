@@ -11,4 +11,3 @@ app = Flask(__name__)
 # Register the controllers to the application
 from controllers import home_controller
 app.register_blueprint(home_controller.blueprint)
-

@@ -23,6 +23,7 @@ Keep in mind that this repository is pre-configured to use VS Code extensions, t
 
 1. Install [Python extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  
 2. Install [Docker Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
+3. Install [Remote Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
 ### 1.2. Oracle Virtual Box  
 `NOTE: You can use any Docker version for any environment to develop this project.  `  
@@ -119,20 +120,52 @@ If you want to see the log outputs from the docker container, you can run the co
 docker-compose up
 ```
 
-## 5. Appendix  
+## 5. Developing Options  
+You can either use your local machine to develop against the container, or you can run the development inside the container.  
+In both cases you are abre to write code and debug. There are a few pros/cons to consider per each development option.
+
+### 5..1 (Option 1) Opening the workspace in the container  
+Use the VS Code extension `Remote-Containers` to open VS Code in the running container.  
+To avoid installing python in your machine, and installing all the packages for your application, you can use `Remote-Containers`.
+In the vs code press `Ctrl+Shit+P` and select `Remote-Containers: Attach to Running Container...`, then select the `python_web_1` (or whatever name you can find). This will open the `src` folder as the default `pythonweb` workspace folder inside the container.  
+Once your vscode is reopened inside the container, the terminal will be available to execute commands internally, plus allowing you to fully debug the code against the machine.  
+#### Pros:
+* You don't need to add pip packages to your local machine  
+* The linter will read directly from the default python installation in the container
+
+#### Cons:
+* You need to reconnect everytime you do code changes  
+
+### 6. (Option 2) Running directly from local machine  
+Just type `F5` on your Visual Studio and it'll do the following:
+* Boot docker container  
+* Open chrome and browse the website  
+
+When you stop the debugging session, the container will be closed automatically.
+#### Pros:  
+* Out of the box solution to run and debug code from your local machine to docker  
+* You can define your own python interpreter for linting  
+
+#### Cons: 
+* You need to install all the pip packages in your local python interpreter, usually installed at `C:\\Python\\Python37\\python.exe`  
+* You need to check which packages are used in the `Dockerfile`
+
+
+
+## Appendix  
 If you want to cleanup docker images and containers
 
 CAUTION: this will flush everything
-### 5.1. stop all containers
+### Stop all containers
 ```
 docker stop $(docker ps -a -q)
 ```
-### 5.2. remove all containers
+### Remove all containers
 ```
 docker rm $(docker ps -a -q)
 ```
 
-### 5.3. remove all images
+### Remove all images
 
 ```
 docker rmi -f $(docker images -a -q)

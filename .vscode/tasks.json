@@ -1,0 +1,28 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "openbrowser",
+            "command": "Chrome",
+            "windows": {
+                "command": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+            },
+            "args": [
+                "http://192.168.99.100"
+            ],
+            "dependsOn": ["dockerstart"]
+        },
+        {
+            "label": "dockerstart",
+            "type": "shell",
+            "command": "docker-compose up -d"
+        },
+        {
+            "label": "dockerstop",
+            "type": "shell",
+            "command": "docker-compose down"
+        }
+    ]
+}
