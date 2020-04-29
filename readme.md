@@ -86,7 +86,8 @@ This file contains script logic to boot up the docker container after it's built
 
 
 ## 4. Wiring up the container 
-Now that you understand the base concept of the project, it's time to load up the container and start developing.
+Now that you understand the base concept of the project, it's time to load up the container and start developing.  
+Start the docker-machine by executing the shortcut `Docker Quickstart Terminal` (it should be available in your desktop).
 
 ### 4.1. Building the container  
 You can go directly to the project folder via powershell, or you can `Shift + R. Click` the project folder, and choose `Open PowerShell window here`.
